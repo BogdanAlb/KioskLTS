@@ -1,0 +1,12 @@
+{
+    "name": "system-preloading-measuring-backend",
+    "version": "1.0.0",
+    "description": "Backend API for System Preloading Measuring",
+    "main": "node server.js",
+    "scrpts": {
+        "start": "node server.js"
+},
+"dependencies": {
+    "express": "^4.18.2"
+    }
+}

@@ -1,0 +1,41 @@
+MDScreen:
+    md_bg_color: app.theme_cls.bg_normal
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(30)
+        spacing: dp(25)
+
+        MDLabel:
+            id: status_label
+            text: "System Preloading Measuring"
+            halign: "center"
+            font_style: "H5"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+
+        MDLabel:
+            id: value_label
+            text: "[b]0.00 N[/b]"
+            markup: True
+            halign: "center"
+            font_style: "H2"
+            theme_text_color: "Custom"
+            text_color: 1, 0.8, 0.2, 1
+
+        MDFloatLayout:
+            MDRectangleFlatIconButton:
+                text: "Start Measuring"
+                icon: "play"
+                pos_hint: {"center_x": 0.35, "center_y": 0.5}
+                md_bg_color: 0, 0.7, 0.3, 1
+                text_color: 1, 1, 1, 1
+                on_release: app.start_measure()
+
+            MDRectangleFlatIconButton:
+                text: "Stop"
+                icon: "stop"
+                pos_hint: {"center_x": 0.65, "center_y": 0.5}
+                md_bg_color: 0.8, 0.2, 0.2, 1
+                text_color: 1, 1, 1, 1
+                on_release: app.stop_measure()
