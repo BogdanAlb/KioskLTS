@@ -1,33 +1,62 @@
-#:import MDIcon kivymd.uix.label.MDIcon
+#:import MDCard kivymd.uix.card.MDCard
 
-# === Pagina Welcome / Login ===
 <WelcomeScreen>:
     MDBoxLayout:
         orientation: "vertical"
-        spacing: dp(25)
-        padding: dp(30)
+        padding: dp(40)
+        spacing: dp(20)
         MDLabel:
-            text: "Bun venit la Kiosk LTS"
+            text: "Bun venit la"
+            halign: "center"
+            font_style: "H5"
+        MDLabel:
+            text: "Lineartechnik Stuttgart GmbH"
             halign: "center"
             font_style: "H4"
-
-        MDTextField:
-            id: name_field
-            hint_text: "Nume utilizator"
-            icon_right: "account"
-            size_hint_x: 0.8
-            pos_hint: {"center_x": 0.5}
-
-        MDRaisedButton:
-            text: "Conectează-te"
-            md_bg_color: app.theme_cls.primary_color
-            size_hint_x: 0.5
-            pos_hint: {"center_x": 0.5}
-            on_release: root.login()
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
 
         Widget:
+            size_hint_y: 0.1
 
-# === Pagina Home ===
+        MDCard:
+            orientation: "vertical"
+            size_hint: (0.85, None)
+            height: dp(300)
+            pos_hint: {"center_x": 0.5}
+            padding: dp(25)
+            spacing: dp(15)
+            md_bg_color: (0.15, 0.15, 0.2, 1)
+            radius: [20]
+
+            MDLabel:
+                text: "Creează primul utilizator"
+                halign: "center"
+                font_style: "H6"
+
+            MDTextField:
+                id: name_field
+                hint_text: "Nume utilizator"
+                icon_right: "account"
+                size_hint_x: 1
+
+            MDTextField:
+                id: password_field
+                hint_text: "Parolă"
+                password: True
+                icon_right: "lock"
+                size_hint_x: 1
+
+            MDRaisedButton:
+                text: "Creează profil"
+                md_bg_color: app.theme_cls.primary_color
+                size_hint_x: 1
+                on_release: root.create_user()
+
+        Widget:
+            size_hint_y: 0.3
+
+
 <HomeScreen>:
     MDBoxLayout:
         orientation: "vertical"
@@ -50,42 +79,3 @@
             MDRaisedButton:
                 text: "Verificare"
                 on_release: app.root.current = "verify"
-
-# === Pagina Citire Live ===
-<LiveDataScreen>:
-    MDBoxLayout:
-        orientation: "vertical"
-        padding: dp(20)
-        MDLabel:
-            text: "📊 Citire live a parametrilor"
-            halign: "center"
-        MDRaisedButton:
-            text: "Înapoi la Home"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "home"
-
-# === Pagina Înregistrare Parametri ===
-<RecordDataScreen>:
-    MDBoxLayout:
-        orientation: "vertical"
-        padding: dp(20)
-        MDLabel:
-            text: "🧾 Înregistrare parametri"
-            halign: "center"
-        MDRaisedButton:
-            text: "Înapoi la Home"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "home"
-
-# === Pagina Verificare ===
-<VerifyScreen>:
-    MDBoxLayout:
-        orientation: "vertical"
-        padding: dp(20)
-        MDLabel:
-            text: "🔍 Verificare date"
-            halign: "center"
-        MDRaisedButton:
-            text: "Înapoi la Home"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "home"
