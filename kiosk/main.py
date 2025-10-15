@@ -83,7 +83,7 @@ class VerifyScreen(MDScreen):
 
 class KioskApp(MDApp):
     def build(self):
-        self.title = "Kiosk LTS"
+        self.title = "PRELOAD MEASURING SYSTEM"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Indigo"
         Builder.load_file("kiosk_ui.kv")
