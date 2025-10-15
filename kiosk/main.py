@@ -1,41 +1,69 @@
 from kivymd.app import MDApp
+from kivymd.uix.screenmanager import MDScreenManager, MDScreen
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 from kivy.lang import Builder
-from kivy.clock import Clock
-from kivymd.uix.snackbar import Snackbar
-from kivy.core.window import Window
-import random, threading, time, requests
+import os
+import json
 
-Window.fullscreen = True
 
-API_URL = "http://localhost:3000/measure"
+# === Pagini ===
 
-class PreloadingApp(MDApp):
+class WelcomeScreen(MDScreen):
+    def login(self):
+        name = self.ids.name_field.text.strip()
+        if not name:
+            self.show_dialog("Eroare", "Introdu un nume de utilizator.")
+            return
+
+        os.makedirs("data", exist_ok=True)
+        with open("data/profile.json", "w") as f:
+            json.dump({"username": name}, f)
+
+        self.manager.current = "home"
+
+    def show_dialog(self, title, text):
+        dialog = MDDialog(
+            title=title,
+            text=text,
+            buttons=[MDFlatButton(text="OK", on_release=lambda x: dialog.dismiss())],
+        )
+        dialog.open()
+
+
+class HomeScreen(MDScreen):
+    pass
+
+
+class LiveDataScreen(MDScreen):
+    pass
+
+
+class RecordDataScreen(MDScreen):
+    pass
+
+
+class VerifyScreen(MDScreen):
+    pass
+
+
+# === Aplicația ===
+
+class KioskApp(MDApp):
     def build(self):
-        self.running = False
-        self.data = []
+        self.title = "Kiosk LTS"
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "DeepOrange"
-        return Builder.load_file("kiosk_ui.kv")
+        self.theme_cls.primary_palette = "BlueGray"
+        Builder.load_file("kiosk_ui.kv")
 
-    def start_measure(self):
-        if not self.running:
-            self.running = True
-            Snackbar(text="Măsurarea a început!").open()
-            threading.Thread(target=self.simulate_measure).start()
+        sm = MDScreenManager()
+        sm.add_widget(WelcomeScreen(name="welcome"))
+        sm.add_widget(HomeScreen(name="home"))
+        sm.add_widget(LiveDataScreen(name="live"))
+        sm.add_widget(RecordDataScreen(name="record"))
+        sm.add_widget(VerifyScreen(name="verify"))
+        return sm
 
-    def stop_measure(self):
-        self.running = False
-        Snackbar(text="Măsurarea a fost oprită.").open()
-
-    def simulate_measure(self):
-        while self.running:
-            value = round(random.uniform(0.0, 100.0), 2)
-            self.root.ids.value_label.text = f"[b]{value} N[/b]"
-            try:
-                requests.post(API_URL, json={"value": value}, timeout=1)
-            except:
-                self.root.ids.status_label.text = "[color=ff3333]⚠ Server inactiv[/color]"
-            time.sleep(1)
 
 if __name__ == "__main__":
-    PreloadingApp().run()
+    KioskApp().run()
