@@ -1,41 +1,91 @@
-MDScreen:
-    md_bg_color: app.theme_cls.bg_normal
+#:import MDIcon kivymd.uix.label.MDIcon
 
+# === Pagina Welcome / Login ===
+<WelcomeScreen>:
     MDBoxLayout:
         orientation: "vertical"
-        padding: dp(30)
         spacing: dp(25)
-
+        padding: dp(30)
         MDLabel:
-            id: status_label
-            text: "System Preloading Measuring"
+            text: "Bun venit la Kiosk LTS"
+            halign: "center"
+            font_style: "H4"
+
+        MDTextField:
+            id: name_field
+            hint_text: "Nume utilizator"
+            icon_right: "account"
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Conectează-te"
+            md_bg_color: app.theme_cls.primary_color
+            size_hint_x: 0.5
+            pos_hint: {"center_x": 0.5}
+            on_release: root.login()
+
+        Widget:
+
+# === Pagina Home ===
+<HomeScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(20)
+        MDLabel:
+            text: "🏠 Pagina principală"
             halign: "center"
             font_style: "H5"
-            theme_text_color: "Custom"
-            text_color: app.theme_cls.primary_color
+        MDBoxLayout:
+            spacing: dp(10)
+            size_hint_y: None
+            height: dp(50)
+            MDRaisedButton:
+                text: "Citire Live"
+                on_release: app.root.current = "live"
+            MDRaisedButton:
+                text: "Înregistrare"
+                on_release: app.root.current = "record"
+            MDRaisedButton:
+                text: "Verificare"
+                on_release: app.root.current = "verify"
 
+# === Pagina Citire Live ===
+<LiveDataScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
         MDLabel:
-            id: value_label
-            text: "[b]0.00 N[/b]"
-            markup: True
+            text: "📊 Citire live a parametrilor"
             halign: "center"
-            font_style: "H2"
-            theme_text_color: "Custom"
-            text_color: 1, 0.8, 0.2, 1
+        MDRaisedButton:
+            text: "Înapoi la Home"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "home"
 
-        MDFloatLayout:
-            MDRectangleFlatIconButton:
-                text: "Start Measuring"
-                icon: "play"
-                pos_hint: {"center_x": 0.35, "center_y": 0.5}
-                md_bg_color: 0, 0.7, 0.3, 1
-                text_color: 1, 1, 1, 1
-                on_release: app.start_measure()
+# === Pagina Înregistrare Parametri ===
+<RecordDataScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        MDLabel:
+            text: "🧾 Înregistrare parametri"
+            halign: "center"
+        MDRaisedButton:
+            text: "Înapoi la Home"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "home"
 
-            MDRectangleFlatIconButton:
-                text: "Stop"
-                icon: "stop"
-                pos_hint: {"center_x": 0.65, "center_y": 0.5}
-                md_bg_color: 0.8, 0.2, 0.2, 1
-                text_color: 1, 1, 1, 1
-                on_release: app.stop_measure()
+# === Pagina Verificare ===
+<VerifyScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        MDLabel:
+            text: "🔍 Verificare date"
+            halign: "center"
+        MDRaisedButton:
+            text: "Înapoi la Home"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "home"
