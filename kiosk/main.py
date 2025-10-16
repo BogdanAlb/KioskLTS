@@ -1,5 +1,5 @@
 from kivymd.app import MDApp
-from kivymd.uix.screenmanager import MDScreenManager, MDScreen
+from kivymd.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivy.lang import Builder
@@ -7,7 +7,7 @@ import os
 import json
 
 
-class WelcomeScreen(MDScreen):
+class WelcomeScreen(Screen):
     def on_pre_enter(self):
         # Verifică dacă există deja un profil creat
         if os.path.exists("data/profile.json"):
