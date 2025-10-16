@@ -88,7 +88,7 @@ class KioskApp(MDApp):
         self.theme_cls.primary_palette = "Indigo"
         Builder.load_file("kiosk_ui.kv")
 
-        sm = MDScreenManager()
+        sm = ScreenManager()
         sm.add_widget(WelcomeScreen(name="welcome"))
         sm.add_widget(LoginScreen(name="login"))
         sm.add_widget(HomeScreen(name="home"))
