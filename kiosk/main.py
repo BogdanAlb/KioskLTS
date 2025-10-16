@@ -37,7 +37,7 @@ class WelcomeScreen(Screen):
         dialog.open()
 
 
-class LoginScreen(MDScreen):
+class LoginScreen(Screen):
     def login(self):
         username = self.ids.login_user.text.strip()
         password = self.ids.login_pass.text.strip()
@@ -65,19 +65,19 @@ class LoginScreen(MDScreen):
         dialog.open()
 
 
-class HomeScreen(MDScreen):
+class HomeScreen(Screen):
     pass
 
 
-class LiveDataScreen(MDScreen):
+class LiveDataScreen(Screen):
     pass
 
 
-class RecordDataScreen(MDScreen):
+class RecordDataScreen(Screen):
     pass
 
 
-class VerifyScreen(MDScreen):
+class VerifyScreen(Screen):
     pass
 
 
