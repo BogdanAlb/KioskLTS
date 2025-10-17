@@ -3,6 +3,9 @@ from kivymd.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivy.lang import Builder
+from kivy.config import Config
+Config.set('kivy', 'keyboard_mode', 'systemanddock')
+
 import os
 import json
 
